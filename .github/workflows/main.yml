@@ -15,29 +15,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.x' # Adjust the version as necessary
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x' # Adjust the version as necessary
 
-    - name: Restore dependencies
-      run: dotnet restore SmartInject.sln
+      - name: Restore dependencies
+        run: dotnet restore SmartInject.sln
 
-    - name: Build Solution
-      run: dotnet build SmartInject.sln --configuration Release --no-restore
+      - name: Build Solution
+        run: dotnet build SmartInject.sln --configuration Release --no-restore
 
-    - name: Run Tests
-      run: dotnet test SmartInject.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage"
+      - name: Run Tests
+        run: dotnet test SmartInject.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage"
 
-    - name: Publish Test Results
-      uses: dorny/test-reporter@v1
-      with:
-        name: 'Test Results'
-        path: '**/TestResults/**/*.xml'
-        reporter: 'dotnettrx'
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1
+        with:
+          name: 'Test Results'
+          path: '**/TestResults/**/*.xml'
+          reporter: 'dotnettrx'
 
   package:
     name: Package
@@ -45,19 +45,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.x' # Adjust the version as necessary
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x' # Adjust the version as necessary
 
-    - name: Pack
-      run: dotnet pack ConnectingApps.SmartInject/ConnectingApps.SmartInject.csproj --configuration Release --no-build -o out
+      - name: Pack
+        run: dotnet pack ConnectingApps.SmartInject/ConnectingApps.SmartInject.csproj --configuration Release --no-build -o out
 
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: nuget-package
-        path: ConnectingApps.SmartInject/out/*.nupkg
+      - name: Publish Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: nuget-package
+          path: ConnectingApps.SmartInject/out/*.nupkg

@@ -23,12 +23,6 @@ namespace ConnectingApps.SmartInjectTry.SelfhostTest
             await VerifyResolve<ISomethingB>();
         }
 
-        [Fact]
-        public void ForceFailure()
-        {
-            throw new Exception("This is a forced failure");
-        }
-
         private async Task VerifyResolve<TToResolve>() where TToResolve : class
         {
             await using (var factory = new TestWebApplicationFactory<TToResolve>())

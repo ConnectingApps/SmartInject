@@ -37,7 +37,7 @@ jobs:
         with:
           name: 'Test Results'
           path: '**/TestResults/**/*.xml'
-          reporter: 'dotnetcore'
+          reporter: 'dotnet-trx'
 
   package:
     name: Package

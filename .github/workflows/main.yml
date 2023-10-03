@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '6.0.x' # Adjust the version as necessary
 
       - name: Run another one-line script
-        run: echo Hello, ${{ github.env.PUBLISH_NUGET }}!     
+        run: echo Hello, ${{ vars.PUBLISH_NUGET }}!     
 
       - name: Restore dependencies
         run: dotnet restore SmartInject.sln
@@ -75,5 +75,5 @@ jobs:
           path: out/*.nupkg
 
       - name: Publish to NuGet
-        if: ${{ github.env.PUBLISH_NUGET == 'true' }} # Conditional execution based on PUBLISH_NUGET environment variable
+        if: ${{ vars.PUBLISH_NUGET == 'true' }} # Conditional execution based on PUBLISH_NUGET environment variable
         run: dotnet nuget push "out/*.nupkg" --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json       

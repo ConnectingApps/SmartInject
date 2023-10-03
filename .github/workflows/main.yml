@@ -30,13 +30,13 @@ jobs:
         run: dotnet build SmartInject.sln --configuration Release --no-restore
 
       - name: Run Tests
-        run: dotnet test SmartInject.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage"
+        run: dotnet test SmartInject.sln --configuration Release --no-build --verbosity normal  --logger trx"
 
       - name: Publish Test Results
         uses: dorny/test-reporter@v1
         with:
           name: 'Test Results'
-          path: '**/TestResults/**/*.xml'
+          path: '**/TestResults/**/*.trx'
           reporter: 'dotnet-trx'
 
   package:

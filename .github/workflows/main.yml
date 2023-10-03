@@ -33,11 +33,11 @@ jobs:
         run: dotnet test SmartInject.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage"
 
       - name: Publish Test Results
-        uses: dorny/test-reporter@v1
+        uses: github-actions/test-reporter@v3
         with:
           name: 'Test Results'
           path: '**/TestResults/**/*.xml'
-          reporter: 'dotnetcore'
+          reporter: 'dotnettrx'
 
   package:
     name: Package

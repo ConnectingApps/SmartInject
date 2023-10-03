@@ -62,9 +62,11 @@ jobs:
       - name: Pack
         run: dotnet pack ConnectingApps.SmartInject/ConnectingApps.SmartInject.csproj --configuration Release --no-build -o out
 
+      - name: Find package file
+        run: find | grep 'nupkg'       
+
       - name: Publish Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: nuget-package
           path: SmartInject/SmartInject/out/*.nupkg
-          

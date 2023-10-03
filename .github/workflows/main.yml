@@ -53,6 +53,12 @@ jobs:
         with:
           dotnet-version: '6.0.x' # Adjust the version as necessary
 
+      - name: Restore dependencies
+        run: dotnet restore SmartInject.sln
+  
+      - name: Build Solution
+        run: dotnet build SmartInject.sln --configuration Release --no-restore          
+
       - name: Pack
         run: dotnet pack ConnectingApps.SmartInject/ConnectingApps.SmartInject.csproj --configuration Release --no-build -o out
 

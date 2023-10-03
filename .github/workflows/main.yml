@@ -66,4 +66,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: nuget-package
-          path: ConnectingApps.SmartInject/out/*.nupkg
+          path: SmartInject/SmartInject/out/*.nupkg
+          

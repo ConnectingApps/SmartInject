@@ -1,5 +1,6 @@
 using ConnectingApps.SmartInject;
 using ConnectingApps.SmartInjectTry.LazyClasses;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace ConnectingApps.SmartInjectTry
 {
@@ -37,7 +38,10 @@ namespace ConnectingApps.SmartInjectTry
                 app.UseSwaggerUI();
             }
 
-            app.MapHealthChecks("/healthz", new JsonHealthCheckOptions());
+            app.MapHealthChecks("/healthz", new HealthCheckOptions()
+            {
+                ResponseWriter = HealthCheckResponseWriters.WriteJsonResponse
+            });
 
             app.UseAuthorization();
 

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConnectingApps.SmartInject
 {
-    internal class HealthCheckResponseWriters
+    public static class HealthCheckResponseWriters
     {
         /// <summary>
         /// method that writes the health check response as JSON baded on
@@ -16,7 +15,7 @@ namespace ConnectingApps.SmartInject
         /// <param name="context"></param>
         /// <param name="healthReport"></param>
         /// <returns></returns>
-        internal static Task WriteJsonResponse(HttpContext context, HealthReport healthReport)
+        public static Task WriteJsonResponse(dynamic context, HealthReport healthReport)
         {
             context.Response.ContentType = "application/json; charset=utf-8";
 
@@ -53,6 +52,8 @@ namespace ConnectingApps.SmartInject
                 jsonWriter.WriteEndObject();
                 jsonWriter.WriteEndObject();
             }
+
+            //HttpResponseWritingExtensions.ContentType(context.Response, "application/json; charset=utf-8");
 
             return context.Response.WriteAsync(
                 Encoding.UTF8.GetString(memoryStream.ToArray()));

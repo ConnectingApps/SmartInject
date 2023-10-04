@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Refit;
 using System.Net;
+using FluentAssertions.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ConnectingApps.SmartInjectTry.SelfhostTest
 {
@@ -17,18 +19,35 @@ namespace ConnectingApps.SmartInjectTry.SelfhostTest
             _api = RestService.For<IHealthCheckApi>(_client);
         }
 
-        [Fact]
-        public async Task HealthCheck_ReturnsHealthyStatus()
+        [Theory]
+        [InlineData(
+            """
+            {
+              "status": "Healthy",
+              "results": {
+                "ExampleHealthCheck": {
+                  "status": "Healthy",
+                  "description": "Example health check is healthy",
+                  "data": {
+                    "exampleDataKey": "exampleDataValue"
+                  }
+                }
+              }
+            }
+            """
+            )]
+        public async Task HealthCheck_ReturnsHealthyStatus(string expectedResponseBody)
         {
             // Act
             var response = await _api.GetHealthStatus();
 
             // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.OK); // Assert the status code
-            response.Content.Should().NotBeNull(); // Assert the content is not null
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Content.Should().NotBeNullOrEmpty();
 
-            // Further assertions based on your expected JSON structure.
-            // You might want to deserialize the response.Content and check individual properties.
+            var actual = JToken.Parse(response.Content!);
+            var expected = JToken.Parse(expectedResponseBody);
+            actual.Should().BeEquivalentTo(expected);
         }
 
         public void Dispose()

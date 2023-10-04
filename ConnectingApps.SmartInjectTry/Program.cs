@@ -38,7 +38,7 @@ namespace ConnectingApps.SmartInjectTry
                 app.UseSwaggerUI();
             }
 
-            app.MapHealthChecks("/healthz", new HealthCheckOptions()
+            app.MapHealthChecks("/healthz", new HealthCheckOptions
             {
                 ResponseWriter = HealthCheckResponseWriters.WriteJsonResponse
             });

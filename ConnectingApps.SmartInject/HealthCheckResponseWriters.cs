@@ -20,8 +20,8 @@ namespace ConnectingApps.SmartInject
             context.Response.ContentType = "application/json; charset=utf-8";
 
             var options = new JsonWriterOptions { Indented = true };
-
             using var memoryStream = new MemoryStream();
+
             using (var jsonWriter = new Utf8JsonWriter(memoryStream, options))
             {
                 jsonWriter.WriteStartObject();
@@ -31,18 +31,14 @@ namespace ConnectingApps.SmartInject
                 foreach (var healthReportEntry in healthReport.Entries)
                 {
                     jsonWriter.WriteStartObject(healthReportEntry.Key);
-                    jsonWriter.WriteString("status",
-                        healthReportEntry.Value.Status.ToString());
-                    jsonWriter.WriteString("description",
-                        healthReportEntry.Value.Description);
+                    jsonWriter.WriteString("status", healthReportEntry.Value.Status.ToString());
+                    jsonWriter.WriteString("description", healthReportEntry.Value.Description);
                     jsonWriter.WriteStartObject("data");
 
                     foreach (var item in healthReportEntry.Value.Data)
                     {
                         jsonWriter.WritePropertyName(item.Key);
-
-                        JsonSerializer.Serialize(jsonWriter, item.Value,
-                            item.Value?.GetType() ?? typeof(object));
+                        JsonSerializer.Serialize(jsonWriter, item.Value, item.Value?.GetType() ?? typeof(object));
                     }
 
                     jsonWriter.WriteEndObject();
@@ -53,10 +49,9 @@ namespace ConnectingApps.SmartInject
                 jsonWriter.WriteEndObject();
             }
 
-            //HttpResponseWritingExtensions.ContentType(context.Response, "application/json; charset=utf-8");
-
-            return context.Response.WriteAsync(
-                Encoding.UTF8.GetString(memoryStream.ToArray()));
+            // Avoiding extension method at the end by using HttpResponse.Body.WriteAsync method directly
+            var buffer = memoryStream.ToArray();
+            return context.Response.Body.WriteAsync(buffer, 0, buffer.Length); ;
         }
     }
 }

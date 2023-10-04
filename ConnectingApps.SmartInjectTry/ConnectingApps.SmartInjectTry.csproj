@@ -14,4 +14,9 @@
     <ProjectReference Include="..\ConnectingApps.SmartInject\ConnectingApps.SmartInject.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Health\" />
+  </ItemGroup>
+
 </Project>
+

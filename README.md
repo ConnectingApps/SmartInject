@@ -49,7 +49,7 @@ using ConnectingApps.SmartInject;
 
 ## Health Check Result in Json
 
-When adding a health check to your .NET application you typically, get a result like `Healthy` after doing a request.
+When adding a health check to your .NET application, you typically get a result like `Healthy` after doing a request.
 The response is not very detailed, which can be a problem when there is something wrong.
 
 However, instead of getting `Healthy` as a response, you can get a detailed json response instead:

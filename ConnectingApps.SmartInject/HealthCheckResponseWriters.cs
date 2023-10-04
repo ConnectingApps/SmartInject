@@ -9,7 +9,14 @@ namespace ConnectingApps.SmartInject
 {
     internal class HealthCheckResponseWriters
     {
-        internal static Task WriteResponse(HttpContext context, HealthReport healthReport)
+        /// <summary>
+        /// method that writes the health check response as JSON baded on
+        /// https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0#customize-output
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="healthReport"></param>
+        /// <returns></returns>
+        internal static Task WriteJsonResponse(HttpContext context, HealthReport healthReport)
         {
             context.Response.ContentType = "application/json; charset=utf-8";
 

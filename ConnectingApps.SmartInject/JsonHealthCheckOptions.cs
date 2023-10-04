@@ -6,7 +6,7 @@ namespace ConnectingApps.SmartInject
     {
         public JsonHealthCheckOptions()
         {
-            ResponseWriter = HealthCheckResponseWriters.WriteResponse;
+            ResponseWriter = HealthCheckResponseWriters.WriteJsonResponse;
         }
     }
 }

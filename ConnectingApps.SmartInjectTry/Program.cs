@@ -1,6 +1,5 @@
 using ConnectingApps.SmartInject;
 using ConnectingApps.SmartInjectTry.LazyClasses;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace ConnectingApps.SmartInjectTry
 {

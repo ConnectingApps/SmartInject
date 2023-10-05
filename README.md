@@ -1,6 +1,6 @@
 ## Introduction
 
-**SmartInject** is a package to simplify dependency injection in .NET . For example, do you know how to deal with circular depencies? You may want to consider a redesign of your application. However, there is a quicker way. Moreover, do you know how to change your health check to ensure you'll get a detailed json formatted health status instead of just `Healthy` or `Unhealthy`? With SmartInject, just a single line of code needs to be changed.
+**SmartInject** is a NuGet package to simplify dependency injection in .NET . For example, do you know how to deal with circular depencies? You may want to consider a redesign of your application. However, there is a quicker way. Moreover, do you know how to change your health check to ensure you'll get a detailed json formatted health status instead of just `Healthy` or `Unhealthy`? With SmartInject, just a single line of code needs to be changed.
 
 ## Contents
 

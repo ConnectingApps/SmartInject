@@ -75,5 +75,5 @@ jobs:
           path: out/*.nupkg
 
       - name: Publish to NuGet
-        if: ${{ vars.PUBLISH_NUGET == 'true' }} # Conditional execution based on PUBLISH_NUGET environment variable
+        if: github.ref == 'refs/heads/main'
         run: dotnet nuget push "out/*.nupkg" --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json       

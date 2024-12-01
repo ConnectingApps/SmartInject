@@ -69,11 +69,11 @@ jobs:
         run: find | grep 'nupkg'       
 
       - name: Publish Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nuget-package
           path: out/*.nupkg
 
       - name: Publish to NuGet
-        if: ${{ vars.PUBLISH_NUGET == 'true' }} # Conditional execution based on PUBLISH_NUGET environment variable
+        if: github.ref == 'refs/heads/main'
         run: dotnet nuget push "out/*.nupkg" --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json       

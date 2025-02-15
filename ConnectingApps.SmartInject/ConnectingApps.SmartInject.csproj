@@ -12,7 +12,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Support for new nuget packages (such as System.Text.Json 9.x)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>2.1.0</Version>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <Version>2.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

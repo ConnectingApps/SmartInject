@@ -23,8 +23,7 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '10.0.x' # Adjust the version as necessary
-          dotnet-quality: 'preview'
-
+          
       - name: Run another one-line script
         run: echo Hello, ${{ vars.PUBLISH_NUGET }}!     
 
@@ -57,7 +56,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '10.0.x' # Adjust the version as necessary
-          dotnet-quality: 'preview'
 
       - name: Restore dependencies
         run: dotnet restore SmartInject.sln
